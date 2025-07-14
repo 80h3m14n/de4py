@@ -1,0 +1,9 @@
+2025-07-14 09:17:54 - INFO - System Architecture: 64bit, OS: Linux-6.1.0-37-amd64-x86_64-with-glibc2.36, Python Version: 3.12.3
+2025-07-14 09:17:54 - INFO - Starting de4py
+2025-07-14 09:17:54 - INFO - Checking for updates
+2025-07-14 09:17:54 - INFO - You are using the latest version
+2025-07-14 09:17:54 - INFO - Stealth mode is on
+2025-07-14 09:17:54 - INFO - Starting the ui
+2025-07-14 09:17:54 - WARNING - Chrome/Chromium not found. Starting in CLI mode instead...
+2025-07-14 09:17:54 - INFO - Use 'python main.py --cli' to start directly in CLI mode
+2025-07-14 09:17:55 - INFO - Checking for updates

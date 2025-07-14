@@ -1,6 +1,6 @@
 # https://github.com/matiasb/unpy2exe/blob/master/unpy2exe.py
 
-import imp
+import importlib.util
 import logging
 import marshal
 import ntpath
@@ -20,6 +20,7 @@ IGNORE = [
     '<boot hacks>.pyc',
     'boot_common.py.pyc',
 ]
+
 
 def __build_magic(magic):
     """Build Python magic number for pyc header."""
@@ -64,7 +65,7 @@ def __source_size(size):
 
 def __current_magic():
     """Current Python magic number."""
-    return imp.get_magic()
+    return importlib.util.MAGIC_NUMBER
 
 
 def _get_scripts_resource(pe):

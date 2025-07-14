@@ -1,10 +1,31 @@
+# HTTP library
 requests
+
+# GUI framework for web technologies
 eel
 eel[jinja2]
+
+# System and process utilities
 psutil
+
+# Packaging and distribution tools
 pyinstaller
-py2exe
+# py2exe # Windows only
+
+# Cryptography and security
 pycryptodome
+
+# Cross-platform console output formatting
 colorama
+
+# Disassembly and analysis tools
 xdis
+
+# Discord Rich Presence integration
 pypresence
+
+# PE file analysis
+pefile
+
+# Python 2/3 compatibility
+six

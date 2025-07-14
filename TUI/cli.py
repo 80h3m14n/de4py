@@ -1,4 +1,11 @@
-import colorama, msvcrt, platform, signal
+import colorama
+import platform
+import signal
+try:
+    import msvcrt  # Windows only
+    HAS_MSVCRT = True
+except ImportError:
+    HAS_MSVCRT = False
 from tkinter import Tk, filedialog
 from deobfuscators.detector import detect_obfuscator
 from analyzer import (
@@ -11,6 +18,7 @@ from analyzer import (
 from config import config
 from util import *
 import socket
+
 
 def signal_handler(sig, frame):
     tui.clear_console()
@@ -95,7 +103,8 @@ def deobfuscator_tab():
         elif choice == "set_file":
             file_path = file_explorer()
             if file_path:
-                print(f"{Fore.CYAN}Selected file path: {file_path}{Style.RESET_ALL}\n")
+                print(
+                    f"{Fore.CYAN}Selected file path: {file_path}{Style.RESET_ALL}\n")
 
             else:
                 print(f"{Fore.YELLOW}No file selected.{Style.RESET_ALL}\n")
@@ -151,13 +160,15 @@ def analyzer_tab():
         elif choice == "set_file":
             file_path = file_explorer()
             if file_path:
-                print(f"{Fore.CYAN}Selected file path: {file_path}{Style.RESET_ALL}\n")
+                print(
+                    f"{Fore.CYAN}Selected file path: {file_path}{Style.RESET_ALL}\n")
 
             else:
                 print(f"{Fore.YELLOW}No file selected.{Style.RESET_ALL}\n")
         elif choice == "exe_packer_detector":
             if file_path:
-                print(f"{Fore.CYAN}Starting the detecting process...{Style.RESET_ALL}")
+                print(
+                    f"{Fore.CYAN}Starting the detecting process...{Style.RESET_ALL}")
                 print(f"{Fore.CYAN}packer detector result:{Style.RESET_ALL}\n")
                 print(detect_packer(file_path))
                 print("\n")
@@ -165,7 +176,8 @@ def analyzer_tab():
                 print(f"{Fore.YELLOW}No file selected.{Style.RESET_ALL}\n")
         elif choice == "exe_unpacker":
             if file_path:
-                print(f"{Fore.CYAN}Starting the unpacking process...{Style.RESET_ALL}")
+                print(
+                    f"{Fore.CYAN}Starting the unpacking process...{Style.RESET_ALL}")
                 print(f"{Fore.CYAN}unpacker result:{Style.RESET_ALL}\n")
                 print(unpack_file(file_path))
                 print("\n")
@@ -282,8 +294,15 @@ def cupdate() -> None:
                 f"{colorama.Fore.YELLOW}Press any key to exit...{colorama.Style.RESET_ALL}\n"
             )
             while True:
-                if msvcrt.kbhit():
+                if HAS_MSVCRT and msvcrt.kbhit():
                     key = msvcrt.getch()
+                    tui.fade_type(
+                        f"{colorama.Fore.YELLOW}Exiting...{colorama.Style.RESET_ALL}"
+                    )
+                    sys.exit(0)
+                elif not HAS_MSVCRT:
+                    # Cross-platform alternative - wait for Enter
+                    input()
                     tui.fade_type(
                         f"{colorama.Fore.YELLOW}Exiting...{colorama.Style.RESET_ALL}"
                     )
@@ -306,7 +325,7 @@ Y88b 888 Y8b.           888  888 d88P Y88b 888
                              888           888 
                              888      Y8b d88P 
                           888       "Y88P"'''
-            )
+                      )
         )
     )
     tui.draw_line()
@@ -346,6 +365,7 @@ def start():
         rpc.start_RPC()
     while 1:
         home_tab()
+
 
 if __name__ == "__main__":
     tui.clear_console()
